@@ -28,6 +28,8 @@ var Items = [
     Item(title: "ID:\(1)"),
 ]
 
+var purple = Color(red: 0.44, green: 0.55, blue: 0.89)
+
 struct ContentView: View {
     @State var dataItems = Items;
 
@@ -35,11 +37,13 @@ struct ContentView: View {
         UITableView.appearance().backgroundColor = .black
         UITableView.appearance().sectionFooterHeight = 1
         UITableView.appearance().sectionHeaderHeight = 1
+        UIToolbar.appearance().isTranslucent = false
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(red: 0.44, green: 0.55, blue: 0.89, alpha: 1)]
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(red: 0.44, green: 0.55, blue: 0.89, alpha: 1)]
     }
 
     var body: some View {
+
         NavigationView {
             List {
                 ForEach(dataItems) { element in
@@ -50,6 +54,7 @@ struct ContentView: View {
                                     .frame(width: 22, height: 22).padding(EdgeInsets(top: 0, leading: -5, bottom: 0, trailing: 10))
                             Text("Hello World. \(element.title)")
                                     .foregroundColor(.white)
+                            // 加入Spacer 使右侧图标局右放置
                             Spacer()
                             Image(systemName: "star")
                                     .frame(maxWidth: 20, maxHeight: .infinity, alignment: .trailing)
@@ -60,10 +65,32 @@ struct ContentView: View {
                 }
                         .onDelete(perform: deleteRow)
                         .listRowBackground(Color(red: 0.13, green: 0.13, blue: 0.13))
-                        .frame(height: 40)
+                        .frame(height: 45)
             }
                     .listStyle(InsetGroupedListStyle())
                     .navigationTitle(Text("计划"))
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            HStack {
+                                Button(action: {}) {
+                                    Image(systemName: "person.badge.plus").font(.system(size: 20)).foregroundColor(purple).padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4))
+                                }
+                                Button(action: {}) {
+
+                                    Image(systemName: "ellipsis").font(.system(size: 20)).foregroundColor(purple).padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4))
+                                }
+                            }
+                        }
+                        ToolbarItem(placement: .bottomBar) {
+                            Button(action: {}, label: {
+                                HStack(alignment: .center, spacing: 20) {
+                                    Image(systemName: "plus").font(.system(size: 20)).foregroundColor(purple)
+                                    Text("添加任务")
+                                            .foregroundColor(purple)
+                                }
+                            })
+                        }
+                    }
         }
     }
 
