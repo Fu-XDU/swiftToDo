@@ -11,9 +11,11 @@ struct EditTaskView: View {
     @State var item: ItemModel = ItemModel()
     @State private var name: String = ""
 
-//    init() {
-//        UITableView.appearance().backgroundColor = UIColor(named: "gray")
-//    }
+    init(item: ItemModel) {
+        //UITableView.appearance().backgroundColor = UIColor(named: "gray")
+        _item = State(initialValue: item)
+        print(self.item.title)
+    }
 
 
     var body: some View {

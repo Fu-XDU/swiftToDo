@@ -17,11 +17,11 @@ struct ContentView: View {
 
     init() {
         //UITableView.appearance().backgroundColor = .black
-        UITableView.appearance().sectionFooterHeight = 1
-        UITableView.appearance().sectionHeaderHeight = 1
-        UIToolbar.appearance().isTranslucent = false
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(red: 0.44, green: 0.55, blue: 0.89, alpha: 1)]
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(red: 0.44, green: 0.55, blue: 0.89, alpha: 1)]
+        //UITableView.appearance().sectionFooterHeight = 1
+        //UITableView.appearance().sectionHeaderHeight = 1
+        //UIToolbar.appearance().isTranslucent = false
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "purple")]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "purple")]
     }
 
     var body: some View {
