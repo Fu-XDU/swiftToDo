@@ -14,7 +14,6 @@ struct EditTaskView: View {
     init(item: ItemModel) {
         //UITableView.appearance().backgroundColor = UIColor(named: "gray")
         _item = State(initialValue: item)
-        print(self.item.title)
     }
 
 
