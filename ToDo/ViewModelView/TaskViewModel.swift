@@ -15,20 +15,21 @@ class TaskViewModel: ObservableObject {
 
     func getItems() {
         let newDoneItems = [
-            ItemModel(title: "test1", done: false, favorite: true),
-            ItemModel(title: "test2", done: false, favorite: true),
-            ItemModel(title: "test3", done: false, favorite: false),
-            ItemModel(title: "test4", done: false, favorite: false),
-            ItemModel(title: "test5", done: false, favorite: false),
-        ]
-        doneItems.append(contentsOf: newDoneItems)
-
-        let newUndoneItems = [
-            ItemModel(title: "test6", done: true, favorite: true),
+            ItemModel(title: "向学校部署新后台", done: true, favorite: true),
             ItemModel(title: "test7", done: true, favorite: true),
             ItemModel(title: "test8", done: true, favorite: false),
             ItemModel(title: "test9", done: true, favorite: false),
             ItemModel(title: "test10", done: true, favorite: false),
+        ]
+        doneItems.append(contentsOf: newDoneItems)
+
+        let newUndoneItems = [
+            ItemModel(title: "向学校部署新后台", done: false, favorite: true),
+            ItemModel(title: "test2", done: false, favorite: true),
+            ItemModel(title: "test3", done: false, favorite: false),
+            ItemModel(title: "test4", done: false, favorite: false),
+            ItemModel(title: "test5", done: false, favorite: false),
+
         ]
         undoneItems.append(contentsOf: newUndoneItems)
     }

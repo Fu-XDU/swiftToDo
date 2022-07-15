@@ -6,7 +6,7 @@ import Foundation
 
 struct ItemModel: Identifiable {
     let id = UUID()
-    let title: String
+    var title: String
     var done: Bool
     var favorite: Bool
 
