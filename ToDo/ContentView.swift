@@ -20,6 +20,7 @@ struct ContentView: View {
         //UITableView.appearance().sectionFooterHeight = 1
         //UITableView.appearance().sectionHeaderHeight = 1
         //UIToolbar.appearance().isTranslucent = false
+        UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "purple")]
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "purple")]
     }
@@ -28,6 +29,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 ScrollView(showsIndicators: false) {
+                    Spacer()
                     VStack {
                         ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
                             Section {
@@ -135,7 +137,7 @@ struct ContentView: View {
                                 .buttonStyle(PlainButtonStyle()).accentColor(.clear)
 
                     }
-                }
+                }.padding(.top,1)
 
                 NavigationLink(destination: EditTaskView(item: ItemModel(title: "", done: false, favorite: false))) {
                     HStack(spacing: 20) {
