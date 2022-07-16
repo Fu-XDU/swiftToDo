@@ -18,18 +18,16 @@ struct ContentView: View {
     @State private var showNew = false
 
     init() {
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = UIColor(named: "theme")
-        UIScrollView.appearance().backgroundColor = UIColor(named: "theme")
+        UIScrollView.appearance().backgroundColor = UIColor(named: "theme") //TODO: 会影响Text field组件
         UINavigationBar.appearance().backgroundColor = UIColor(named: "theme") // 导航栏背景
         UINavigationBar.appearance().tintColor = UIColor(named: "navTitle") // 导航栏 左上角返回
         UINavigationBar.appearance().barTintColor = UIColor(named: "theme") // inline 导航栏标题
 
-        UITableView.appearance().backgroundColor = UIColor(named: "theme") // Uses UIColor
         //UITableView.appearance().backgroundColor = UIColor(named: "theme")
         //UITableView.appearance().sectionFooterHeight = 1
         //UITableView.appearance().sectionHeaderHeight = 1
         //UIToolbar.appearance().isTranslucent = false
+
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "navTitle") as Any]
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "navTitle") as Any]
@@ -38,7 +36,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                ScrollView(showsIndicators: false) {
+                ScrollView([.vertical], showsIndicators: false) {
                     VStack(spacing: 1) {
                         ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
                             Section {

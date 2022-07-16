@@ -35,18 +35,82 @@ class TaskViewModel: ObservableObject {
     }
 
     func itemDone(index: Int) {
-        let t = undoneItems[index]
+        var t = undoneItems[index]
         undoneItems.remove(at: index)
+        t.done = true
         doneItems.insert(t, at: 0)
     }
 
     func itemUndone(index: Int) {
-        let t = doneItems[index]
+        var t = doneItems[index]
         doneItems.remove(at: index)
+        t.done = false
         undoneItems.insert(t, at: 0)
     }
 
     func deleteRow(at offsets: IndexSet) {
         undoneItems.remove(atOffsets: offsets)
+    }
+
+    func addItem(title: String, done: Bool, favorite: Bool) {
+        if (done) {
+            doneItems.insert(ItemModel(title: title, done: done, favorite: favorite), at: 0)
+        } else {
+            undoneItems.insert(ItemModel(title: title, done: done, favorite: favorite), at: 0)
+        }
+    }
+
+    func addItem(item: ItemModel) {
+        addItem(title: item.title, done: item.done, favorite: item.favorite)
+    }
+
+    func updateItem(id: UUID, newItem: ItemModel) {
+        var itemIndex = getDoneItem(id: id)
+        var oldItemDone = true
+
+        if (itemIndex == -1) {
+            itemIndex = getUndoneItem(id: id)
+            if (itemIndex == -1) {
+                return
+            }
+            oldItemDone = false
+        }
+
+        if (oldItemDone) {
+            doneItems[itemIndex].title = newItem.title
+            doneItems[itemIndex].favorite = newItem.favorite
+        } else {
+            undoneItems[itemIndex].title = newItem.title
+            undoneItems[itemIndex].favorite = newItem.favorite
+        }
+
+
+        if (oldItemDone != newItem.done) {
+            if (oldItemDone) {
+                itemUndone(index: itemIndex)
+            } else {
+                itemDone(index: itemIndex)
+            }
+        }
+    }
+
+
+    func getDoneItem(id: UUID) -> Int {
+        getItemIndex(items: doneItems, id: id)
+    }
+
+    func getUndoneItem(id: UUID) -> Int {
+        getItemIndex(items: undoneItems, id: id)
+    }
+
+    func getItemIndex(items: [ItemModel], id: UUID) -> Int {
+        var i = 0;
+        for item in items {
+            if (item.id == id) {
+                return i
+            }
+            i += 1
+        }
+        return -1
     }
 }
