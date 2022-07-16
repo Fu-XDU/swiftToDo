@@ -52,17 +52,28 @@ struct EditTaskView: View {
                         .frame(width: 380, height: 50, alignment: .leading)
                         .padding(.leading, 15)
             }
-                    .background(Color(red: 0.13, green: 0.13, blue: 0.13))
+                    //.background(Color(red: 0.13, green: 0.13, blue: 0.13))
                     .cornerRadius(5)
                     .padding(.top, 10)
 
-            ScrollView {
-                ForEach(0..<20) { i in
-                    Text("\(i)").padding()
-                }
+            Button {
+
+            } label: {
+                Text("完成")
             }
-                    .background(Color(red: 0.13, green: 0.13, blue: 0.13))
-                    .padding()
+
+//            ScrollView {
+//                ForEach(0..<20) { i in
+//                    Text("\(i)").padding()
+//                }
+//            }
+//                    .background(Color(red: 0.13, green: 0.13, blue: 0.13))
+//                    .padding()
+
+
+
+
+
         }
                 .navigationBarTitle(Text("Title"), displayMode: .inline)
     }

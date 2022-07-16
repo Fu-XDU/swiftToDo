@@ -16,7 +16,15 @@ struct ContentView: View {
     @State private var showNew = false
 
     init() {
-        //UITableView.appearance().backgroundColor = .black
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = UIColor(named: "purple")
+        UIScrollView.appearance().backgroundColor = UIColor(named: "purple")
+        UINavigationBar.appearance().backgroundColor = UIColor(named: "purple")
+        UINavigationBar.appearance().tintColor = UIColor(named: "purple")
+        UINavigationBar.appearance().barTintColor = UIColor(named: "purple")
+
+        UITableView.appearance().backgroundColor = UIColor(named: "purple") // Uses UIColor
+        //UITableView.appearance().backgroundColor = .purple
         //UITableView.appearance().sectionFooterHeight = 1
         //UITableView.appearance().sectionHeaderHeight = 1
         //UIToolbar.appearance().isTranslucent = false
@@ -26,11 +34,11 @@ struct ContentView: View {
     }
 
     var body: some View {
+
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 ScrollView(showsIndicators: false) {
-                    Spacer()
-                    VStack {
+                    VStack (spacing: 3){
                         ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
                             Section {
                                 NavigationLink(destination: EditTaskView(item: taskViewModel.undoneItems[i])) {
@@ -64,12 +72,10 @@ struct ContentView: View {
                             }
                                     .background(Color(red: 0.13, green: 0.13, blue: 0.13))
                                     .cornerRadius(5)
-                                    .padding(.top, -5)
-
                             //.animation(Animation.easeOut(duration: 0.6).delay(100 * Double(i)), value: false)
                             //.transition(.move(edge: .leading))
                             //.frame(width: 440)
-                        }
+                        }.padding(.bottom, 3)
                         //.onDelete(perform: deleteRow)
 
 
@@ -137,22 +143,40 @@ struct ContentView: View {
                                 .buttonStyle(PlainButtonStyle()).accentColor(.clear)
 
                     }
-                }.padding(.top,1)
-
-                NavigationLink(destination: EditTaskView(item: ItemModel(title: "", done: false, favorite: false))) {
-                    HStack(spacing: 20) {
-                        Image(systemName: "plus").font(.system(size: 25)).foregroundColor(Color("purple"))
-                        Text("添加任务")
-                                .foregroundColor(Color("purple")).padding(.leading, -5)
-                    }
-                            .frame(width: 380, height: 50, alignment: .leading)
-                            .padding(.leading, 15)
+                            .padding(.top, -1).background(Color("purple"))
                 }
-                        .background(Color(red: 0.13, green: 0.13, blue: 0.13))
-                        .cornerRadius(10)
-                        .padding(.top, 10)
 
+//                Button {
+//                } label: {
+//                    HStack(spacing: 20) {
+//                        Image(systemName: "plus").font(.system(size: 25)).foregroundColor(Color("purple"))
+//                        Text("添加任务")
+//                                .foregroundColor(Color("purple")).padding(.leading, -5)
+//                    }
+//                            .frame(width: 380, height: 50, alignment: .leading)
+//                            .padding(.leading, 15)
+//                }
+//                        .background(Color(red: 0.13, green: 0.13, blue: 0.13))
+//                        .cornerRadius(10)
+//                        .frame(width: 1000, height: 60)
+//                        .background(Color("purple").ignoresSafeArea(.all))
+
+                    NavigationLink(destination: EditTaskView(item: ItemModel(title: "", done: false, favorite: false))) {
+                        HStack(spacing: 20) {
+                            Image(systemName: "plus").font(.system(size: 25)).foregroundColor(Color("purple"))
+                            Text("添加任务")
+                                    .foregroundColor(Color("purple")).padding(.leading, -5)
+                        }
+                                .frame(width: 380, height: 50, alignment: .leading)
+                                .padding(.leading, 15)
+                    }
+                            .background(Color(red: 0.13, green: 0.13, blue: 0.13))
+                            .cornerRadius(10)
+                            .padding(.top, 10)
+                            .frame(width: 1000, height: 60)
+                            .background(Color("purple").ignoresSafeArea(.all))
             }
+
                     .navigationTitle("计划").toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             HStack {
@@ -167,9 +191,9 @@ struct ContentView: View {
                     }
         }
                 .environmentObject(taskViewModel)
+
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
