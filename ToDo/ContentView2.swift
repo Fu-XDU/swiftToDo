@@ -4,10 +4,12 @@
 
 import SwiftUI
 
-struct TaskList: Identifiable {
-    let id = UUID()
-
-}
+//struct SectionCustom: ViewModifier {
+//    func body(content: Content) -> some View {
+//        content.
+//
+//    }
+//}
 
 struct ContentView2: View {
 
@@ -15,6 +17,13 @@ struct ContentView2: View {
 
     @State private var isExpanded = true
     let cornerRadius: CGFloat = 7
+
+    init() {
+//    UITableView.appearance().separatorStyle = .none
+//    UITableView.appearance().backgroundColor = .black
+        UITableView.appearance().sectionFooterHeight = 10
+        UITableView.appearance().sectionHeaderHeight = 10
+    }
 
     var body: some View {
         NavigationView {
@@ -53,6 +62,7 @@ struct ContentView2: View {
                                 .padding(EdgeInsets(top: -10, leading: -20, bottom: -10, trailing: -10))
                                 .frame(width: 400, height: 40, alignment: .leading)
                     }
+
                     // 已完成内容
                     if (taskViewModel.doneItems.count > 0) {
                         Section(header: Button {
@@ -71,13 +81,18 @@ struct ContentView2: View {
                                 .foregroundColor(Color("navTitle"))
                                 .background(Color("theme-layer"))
                                 .cornerRadius(5)
-                                .padding(EdgeInsets(top: -5, leading: 0, bottom: 0, trailing: 0))
-                        ) {
-                        }
+                                //.padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                                , content: {
+                            if (isExpanded) {
+                                Text("32")
+                            }
+                        })
                         if (isExpanded) {
                             ForEach(taskViewModel.doneItems.indices, id: \.self) { i in
-                                Section {
-                                    NavigationLink(destination: EditTaskView(item: taskViewModel.doneItems[i])) {
+                                if (i > 0) {
+                                    Section(header: Text("1233").font(.system(size: 50, weight: .bold))) {
+                                        Text("32")
+                                        /*NavigationLink(destination: EditTaskView(item: taskViewModel.doneItems[i])) {
                                         HStack(spacing: 20) {
                                             Image(systemName: taskViewModel.doneItems[i].done ? "checkmark.circle.fill" : "circle")
                                                     .scaleEffect(1.5)
@@ -102,18 +117,22 @@ struct ContentView2: View {
                                         }
                                                 .frame(alignment: .leading)
                                                 .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: 0))
+                                    }*/
                                     }
+                                            .background(Color("listBackground"))
+                                            .padding(EdgeInsets(top: -10, leading: -20, bottom: -10, trailing: -10))
+                                            .frame(width: 400, height: 40, alignment: .leading)
                                 }
-                                        .background(Color("listBackground"))
-                                        .padding(EdgeInsets(top: -10, leading: -20, bottom: -10, trailing: -10))
-                                        .frame(width: 400, height: 40, alignment: .leading)
                             }
+
                         }
+
                     }
                 }
                         .listStyle(InsetGroupedListStyle())
 
                         .navigationTitle(Text("计划"))
+
                         .toolbar {
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 HStack {
