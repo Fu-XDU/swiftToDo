@@ -13,9 +13,14 @@
 		6FDACA0D287D51A300BF2863 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACA0C287D51A300BF2863 /* Preview Assets.xcassets */; };
 		6FDACA18287D51A300BF2863 /* ToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACA17287D51A300BF2863 /* ToDoTests.swift */; };
 		6FDACA23287D51A300BF2863 /* ToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACA22287D51A300BF2863 /* ToDoUITests.swift */; };
+		B4B23024E466C61978BE02A7 /* CardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23A4988035B3E4C72CD8E /* CardRow.swift */; };
 		B4B230F021A08221E9509270 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23E2F65714E4B96E6A795 /* EditTaskView.swift */; };
+		B4B233ADA514CCC7C5C64913 /* ContentView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23349E332348319FF0A36 /* ContentView3.swift */; };
+		B4B234FFBCC530B19EE2AFC3 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23F87D099AC8C15F6F8FF /* Card.swift */; };
+		B4B23B4901456FB9D0FD8E3E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B231DC5599F3710A0B49A3 /* Home.swift */; };
 		B4B23C050A418C1C28D88A1E /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B235D58048F62B3F955454 /* ItemModel.swift */; };
 		B4B23D8E10C7BC12B24DA279 /* ContentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B235ABEC950ECEC5643E63 /* ContentView2.swift */; };
+		B4B23DBD56DB4470ADA69F00 /* CustomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */; };
 		B4B23F24B5BE3403610B7BE1 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B238640BE78E7CA42AE4B7 /* TaskViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,10 +54,15 @@
 		6FDACA1E287D51A300BF2863 /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDACA22287D51A300BF2863 /* ToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITests.swift; sourceTree = "<group>"; };
 		6FDACA24287D51A300BF2863 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4B231DC5599F3710A0B49A3 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		B4B23349E332348319FF0A36 /* ContentView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView3.swift; sourceTree = "<group>"; };
 		B4B235ABEC950ECEC5643E63 /* ContentView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView2.swift; sourceTree = "<group>"; };
 		B4B235D58048F62B3F955454 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		B4B238640BE78E7CA42AE4B7 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		B4B23A4988035B3E4C72CD8E /* CardRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRow.swift; sourceTree = "<group>"; };
+		B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
 		B4B23E2F65714E4B96E6A795 /* EditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		B4B23F87D099AC8C15F6F8FF /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +123,10 @@
 				B4B23A4729AE55E121B7CA5A /* Views */,
 				B4B23A0B477B615ACCF41460 /* ViewModelView */,
 				B4B235ABEC950ECEC5643E63 /* ContentView2.swift */,
+				B4B23349E332348319FF0A36 /* ContentView3.swift */,
+				B4B23F87D099AC8C15F6F8FF /* Card.swift */,
+				B4B23A4988035B3E4C72CD8E /* CardRow.swift */,
+				B4B231DC5599F3710A0B49A3 /* Home.swift */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -154,6 +168,7 @@
 		B4B23A4729AE55E121B7CA5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +197,8 @@
 			dependencies = (
 			);
 			name = ToDo;
+			packageProductDependencies = (
+			);
 			productName = ToDo;
 			productReference = 6FDACA02287D51A200BF2863 /* ToDo.app */;
 			productType = "com.apple.product-type.application";
@@ -253,6 +270,8 @@
 				Base,
 			);
 			mainGroup = 6FDAC9F9287D51A200BF2863;
+			packageReferences = (
+			);
 			productRefGroup = 6FDACA03287D51A200BF2863 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -301,6 +320,11 @@
 				B4B23C050A418C1C28D88A1E /* ItemModel.swift in Sources */,
 				B4B23F24B5BE3403610B7BE1 /* TaskViewModel.swift in Sources */,
 				B4B23D8E10C7BC12B24DA279 /* ContentView2.swift in Sources */,
+				B4B233ADA514CCC7C5C64913 /* ContentView3.swift in Sources */,
+				B4B234FFBCC530B19EE2AFC3 /* Card.swift in Sources */,
+				B4B23024E466C61978BE02A7 /* CardRow.swift in Sources */,
+				B4B23DBD56DB4470ADA69F00 /* CustomNavView.swift in Sources */,
+				B4B23B4901456FB9D0FD8E3E /* Home.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -442,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -502,6 +526,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				INFOPLIST_FILE = ToDoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -523,6 +548,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				INFOPLIST_FILE = ToDoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -543,6 +569,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				INFOPLIST_FILE = ToDoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -562,6 +589,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				INFOPLIST_FILE = ToDoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

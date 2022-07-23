@@ -15,7 +15,7 @@ struct EditTaskView: View {
     @State private var name: String = ""
 
     init(item: ItemModel) {
-        // UIScrollView.appearance().backgroundColor = nil
+        //UIScrollView.appearance().backgroundColor = nil
         _item = State(initialValue: item)
         _oldItem = State(initialValue: item)
         _isNew = State(initialValue: item.title == "")

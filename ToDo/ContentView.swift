@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 struct ContentView: View {
 
     @StateObject var taskViewModel: TaskViewModel = TaskViewModel()
@@ -28,6 +28,7 @@ struct ContentView: View {
         UINavigationBar.appearance().standardAppearance = navBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
 
+        //UIScrollView.appearance().backgroundColor = UIColor(named: "theme")
         //UIScrollView.appearance().backgroundColor = UIColor(named: "theme") //TODO: 会影响Text field组件
         //UINavigationBar.appearance().backgroundColor = UIColor(named: "theme") // 导航栏背景
         UINavigationBar.appearance().tintColor = UIColor(named: "navTitle") // 导航栏 左上角返回
@@ -37,12 +38,8 @@ struct ContentView: View {
     }
 
     var body: some View {
-
         NavigationView {
             VStack(spacing: 0) {
-                //GeometryReader { proxy in
-                    //ZStack {
-                        //Color("theme")
                         ScrollView([.vertical], showsIndicators: false) {
                             VStack(spacing: 1) {
                                 ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
@@ -146,10 +143,10 @@ struct ContentView: View {
                                         .padding(.top, 7)
                                         .buttonStyle(PlainButtonStyle()).accentColor(.clear)
 
-                            }
-                                    .padding(.top, -1).background(Color("theme"))
+                            }.padding(.top, -1).background(Color("theme"))
 
                         }
+
                     //}
 
                //}
@@ -195,3 +192,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+*/
