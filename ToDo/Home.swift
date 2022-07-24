@@ -25,7 +25,7 @@ struct Home: View {
                     Card()
                     Card()
                 })
-            }.listRowBackground(Color(red: 0.95, green: 0.95, blue: 0.97))
+            }.listRowBackground(Color("CardBackground"))
 
 
             Section(header: Text("My Lists")) {
