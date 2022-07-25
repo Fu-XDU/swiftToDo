@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Card: View {
     let height: CGFloat = 100
+
     var body: some View {
         Rectangle()
                 .fill(Color.red)

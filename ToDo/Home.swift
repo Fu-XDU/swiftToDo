@@ -9,32 +9,42 @@ struct Home: View {
     @StateObject var taskViewModel: TaskViewModel = TaskViewModel()
 
     let spacing: CGFloat = 20
-
-    @State private var isExpanded = true
-    @State private var input = ""
-    @State private var showNew = false
+    @GestureState var isDetectingLongPress = false
 
     init() {
     }
 
+    var longPress: some Gesture {
+        LongPressGesture(minimumDuration: 1000)
+                .updating($isDetectingLongPress) { currentState, gestureState,
+                                                   transaction in
+                    gestureState = currentState
+                    transaction.animation = Animation.easeIn(duration: 0.1)
+                }
+    }
     var body: some View {
-        List {
-            Section {
+
+        Form {
+
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], content: {
-                    Card()
+                    Card().opacity(isDetectingLongPress ? 0.5 : 1).gesture(longPress)
                     Card()
                     Card()
                 })
-            }.listRowBackground(Color("CardBackground"))
+                        .listRowBackground(Color("CardBackground"))
+
+                    .listStyle(InsetGroupedListStyle())
 
 
             Section(header: Text("My Lists")) {
                 ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
-                    Text("8")
+                    Button {
+                    } label: {
+                        Text("8")
+                    }
                 }
             }
-        }
-                .listStyle(InsetGroupedListStyle())
-                .navigationBarTitle("", displayMode: .inline)
+        }.navigationBarTitle("", displayMode: .inline)
+
     }
 }
