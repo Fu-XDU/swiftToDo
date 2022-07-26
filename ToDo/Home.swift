@@ -24,7 +24,7 @@ struct Home: View {
                 Card().padding(.leading, -20)
                 Card().padding(.trailing, -20)
                 Card().frame(width: 373).padding(.trailing, -175)
-            })
+            }).padding(.top, 5)
                     .listRowBackground(Color("CardBackground"))
 
             Section(header: Text("My Lists").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color("PureWhite")).padding(.leading, 10)) {
@@ -44,5 +44,6 @@ struct Home: View {
         }
                 .listStyle(InsetGroupedListStyle())
                 .navigationBarTitle("", displayMode: .inline)
+
     }
 }
