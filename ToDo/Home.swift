@@ -16,37 +16,33 @@ struct Home: View {
     init() {
     }
 
-    var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 1000)
-                .updating($isDetectingLongPress) { currentState, gestureState,
-                                                   transaction in
-                    gestureState = currentState
-                    transaction.animation = Animation.easeIn(duration: 0.1)
-                }
-    }
     var body: some View {
+        List {
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
+                Card().padding(.leading, -20)
+                Card().padding(.trailing, -20)
+                Card().padding(.leading, -20)
+                Card().padding(.trailing, -20)
+                Card().frame(width: 373).padding(.trailing, -175)
+            })
+                    .listRowBackground(Color("CardBackground"))
 
-        Form {
-
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], content: {
-                    Card().opacity(isDetectingLongPress ? 0.5 : 1).gesture(longPress)
-                    Card()
-                    Card()
-                })
-                        .listRowBackground(Color("CardBackground"))
-
-                    .listStyle(InsetGroupedListStyle())
-
-
-            Section(header: Text("My Lists")) {
+            Section(header: Text("My Lists").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color("PureWhite")).padding(.leading, 10)) {
                 ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
-                    Button {
-                    } label: {
-                        Text("8")
-                    }
-                }
-            }
-        }.navigationBarTitle("", displayMode: .inline)
+                    NavigationLink(destination: ListDetailView(), label: {
+                        HStack{
+                            Image(systemName: "calendar.circle.fill").foregroundColor(Color.blue).font(.system(size: 35)).padding(.leading,-10)
+                            Text("Title")
+                            Spacer()
+                            Text("0").foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
+                        }
 
+                    })
+                }.frame(height: 45)
+            }
+                    .textCase(nil)
+        }
+                .listStyle(InsetGroupedListStyle())
+                .navigationBarTitle("", displayMode: .inline)
     }
 }
