@@ -13,7 +13,6 @@
 		6FDACA0D287D51A300BF2863 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACA0C287D51A300BF2863 /* Preview Assets.xcassets */; };
 		6FDACA18287D51A300BF2863 /* ToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACA17287D51A300BF2863 /* ToDoTests.swift */; };
 		6FDACA23287D51A300BF2863 /* ToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACA22287D51A300BF2863 /* ToDoUITests.swift */; };
-		B4B23024E466C61978BE02A7 /* CardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23A4988035B3E4C72CD8E /* CardRow.swift */; };
 		B4B230F021A08221E9509270 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23E2F65714E4B96E6A795 /* EditTaskView.swift */; };
 		B4B233ADA514CCC7C5C64913 /* ContentView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23349E332348319FF0A36 /* ContentView3.swift */; };
 		B4B233D2BACB0A55BE39C6DE /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B233607CD1AA433D5F8933 /* ListDetailView.swift */; };
@@ -61,7 +60,6 @@
 		B4B235ABEC950ECEC5643E63 /* ContentView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView2.swift; sourceTree = "<group>"; };
 		B4B235D58048F62B3F955454 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		B4B238640BE78E7CA42AE4B7 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
-		B4B23A4988035B3E4C72CD8E /* CardRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRow.swift; sourceTree = "<group>"; };
 		B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
 		B4B23E2F65714E4B96E6A795 /* EditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		B4B23F87D099AC8C15F6F8FF /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				B4B235ABEC950ECEC5643E63 /* ContentView2.swift */,
 				B4B23349E332348319FF0A36 /* ContentView3.swift */,
 				B4B23F87D099AC8C15F6F8FF /* Card.swift */,
-				B4B23A4988035B3E4C72CD8E /* CardRow.swift */,
 				B4B231DC5599F3710A0B49A3 /* Home.swift */,
 			);
 			path = ToDo;
@@ -325,7 +322,6 @@
 				B4B23D8E10C7BC12B24DA279 /* ContentView2.swift in Sources */,
 				B4B233ADA514CCC7C5C64913 /* ContentView3.swift in Sources */,
 				B4B234FFBCC530B19EE2AFC3 /* Card.swift in Sources */,
-				B4B23024E466C61978BE02A7 /* CardRow.swift in Sources */,
 				B4B23DBD56DB4470ADA69F00 /* CustomNavView.swift in Sources */,
 				B4B23B4901456FB9D0FD8E3E /* Home.swift in Sources */,
 				B4B233D2BACB0A55BE39C6DE /* ListDetailView.swift in Sources */,

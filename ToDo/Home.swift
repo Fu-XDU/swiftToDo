@@ -22,11 +22,11 @@ struct Home: View {
         List {
             if (isEditMode == .inactive) {
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
-                    Card().padding(.leading, -20)
-                    Card().padding(.trailing, -20)
-                    Card().padding(.leading, -20)
-                    Card().padding(.trailing, -20)
-                    Card().frame(width: 373).padding(.trailing, -175)
+                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).padding(.leading, -20)
+                    Card(icon: "calendar.circle.fill", iconColor: Color.red).padding(.trailing, -20)
+                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).padding(.leading, -20)
+                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).padding(.trailing, -20)
+                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).frame(width: 373).padding(.trailing, -175)
                 })
                         .padding(.top, 5)
                         .listRowBackground(Color("CardBackground"))

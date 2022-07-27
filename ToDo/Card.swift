@@ -10,6 +10,13 @@ import SwiftUI
 struct Card: View {
     let height: CGFloat = 81
     @GestureState var isDetectingLongPress = false
+    var icon: String = "calendar.circle.fill"
+    var iconColor: Color = Color.blue
+
+    init(icon: String, iconColor: Color) {
+        self.icon = icon
+        self.iconColor = iconColor
+    }
 
     var longPress: some Gesture {
         LongPressGesture(minimumDuration: 1000)
@@ -23,8 +30,9 @@ struct Card: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "calendar.circle.fill")
-                        .foregroundColor(Color.blue)
+                Image(systemName: icon)
+//                        .background(Color.white)
+                        .foregroundColor(iconColor)
                         .font(.system(size: 35))
                 Spacer()
                 Text("0")
@@ -47,6 +55,6 @@ struct Card: View {
 
 struct ImageRow_Previews: PreviewProvider {
     static var previews: some View {
-        Card()
+        Card(icon: "calendar.circle.fill", iconColor: Color.blue)
     }
 }
