@@ -22,11 +22,17 @@ struct Home: View {
         List {
             if (isEditMode == .inactive) {
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
-                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).padding(.leading, -20)
-                    Card(icon: "calendar.circle.fill", iconColor: Color.red).padding(.trailing, -20)
-                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).padding(.leading, -20)
-                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).padding(.trailing, -20)
-                    Card(icon: "calendar.circle.fill", iconColor: Color.blue).frame(width: 373).padding(.trailing, -175)
+                    Card(icon: "calendar", iconColor: Color.blue, title: "Today", taskCount: 0)
+                            .padding(.leading, -20)
+                    Card(icon: "calendar", iconColor: Color.red, title: "Scheduled", taskCount: 0)
+                            .padding(.trailing, -20)
+                    Card(icon: "tray.fill", iconColor: Color(red: 0.36, green: 0.38, blue: 0.41), title: "All", taskCount: 0)
+                            .frame(width: 373)
+                            .padding(.trailing, -175)
+//                    Card(icon: "calendar", iconColor: Color.blue)
+//                            .padding(.trailing, -20)
+//                    Card(icon: "calendar", iconColor: Color.blue).frame(width: 373)
+//                            .padding(.trailing, -175)
                 })
                         .padding(.top, 5)
                         .listRowBackground(Color("CardBackground"))
@@ -34,7 +40,8 @@ struct Home: View {
                 ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
                     NavigationLink(destination: ListDetailView(), label: {
                         HStack {
-                            Image(systemName: "calendar.circle.fill").foregroundColor(Color.blue).font(.system(size: 35)).padding(.leading, -10)
+                            CustomIcon(icon: "calendar", iconColor: Color.blue, iconFont: .system(size: 16, weight: .bold), iconPadding: 9)
+                                    .padding(.leading, -10)
                             Text("Title")
                             Spacer()
                             Text("0").foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
@@ -45,20 +52,19 @@ struct Home: View {
                             print("\(v) \(i)")
                         }
                         .frame(height: 45)
-                //.animation(Animation.easeInOut(duration: 1.0))
-
             }
 
             Section(header: Text("My Lists").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color("PureWhite")).padding(.leading, 10)) {
                 ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
                     NavigationLink(destination: ListDetailView(), label: {
                         HStack {
-                            Image(systemName: "calendar.circle.fill").foregroundColor(Color.blue).font(.system(size: 35)).padding(.leading, -10)
+                            CustomIcon(icon: "list.bullet", iconColor: Color.blue, iconFont: .system(size: 16, weight: .bold), iconPadding: 9)
+
+                                    .padding(.leading, -10)
                             Text("Title")
                             Spacer()
                             Text("0").foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
                         }
-
                     })
                 }
                         .onDelete { index in
@@ -68,7 +74,6 @@ struct Home: View {
                             print("\(v) \(i)")
                         }
                         .frame(height: 45)
-
             }
                     .textCase(nil)
         }
