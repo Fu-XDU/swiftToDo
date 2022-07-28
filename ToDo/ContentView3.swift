@@ -13,11 +13,7 @@ struct ContentView3: View {
 
     var body: some View {
         CustomNavigationView(view: Home())
-
                 .ignoresSafeArea()
-//        NavigationView {
-//            Home()
-//        }
     }
 }
 
