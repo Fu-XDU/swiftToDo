@@ -27,6 +27,7 @@ struct CustomNavigationView: UIViewControllerRepresentable {
         // controller.navigationBar.topItem?.hidesSearchBarWhenScrolling = true
         controller.navigationBar.topItem?.searchController = searchController
 
+//        controller.toolbar.isTranslucent = false
 
         return controller
     }

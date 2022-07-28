@@ -9,11 +9,17 @@ import SwiftUI
 
 struct Card: View {
     let height: CGFloat = 81
-    @GestureState var isDetectingLongPress = false
     var icon: String = "calendar.circle.fill"
     var title: String = "Title"
     var iconColor: Color = Color.blue
     var taskCount: Int = 0
+
+    init(card: CardModel) {
+        icon = card.icon
+        iconColor = card.iconColor
+        title = card.title
+        taskCount = card.count
+    }
 
     init(icon: String, iconColor: Color, title: String, taskCount: Int) {
         self.icon = icon
@@ -22,16 +28,8 @@ struct Card: View {
         self.taskCount = taskCount
     }
 
-    var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 1000)
-                .updating($isDetectingLongPress) { currentState, gestureState,
-                                                   transaction in
-                    gestureState = currentState
-                    transaction.animation = Animation.easeIn(duration: 0.1)
-                }
-    }
-
     var body: some View {
+
         VStack(alignment: .leading) {
             HStack {
                 CustomIcon(icon: icon, iconColor: iconColor, iconFont: .system(size: 18, weight: .regular), iconPadding: 7)
@@ -39,6 +37,7 @@ struct Card: View {
                 Text("\(taskCount)")
                         .font(.system(size: 25, weight: .bold, design: .rounded))
                         .padding(EdgeInsets(top: -5, leading: 0, bottom: 0, trailing: 20))
+                        .foregroundColor(Color("PureWhite"))
             }
                     .padding(EdgeInsets(top: 7, leading: 10, bottom: 0, trailing: 0))
             Text(title)
@@ -50,7 +49,7 @@ struct Card: View {
                 .background(Color("listBackground"))
                 .cornerRadius(10)
                 .frame(height: height)
-                .opacity(isDetectingLongPress ? 0.5 : 1).gesture(longPress)
+
     }
 }
 
