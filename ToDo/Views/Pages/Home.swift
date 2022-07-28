@@ -11,6 +11,7 @@ struct Home: View {
     @StateObject var taskViewModel: TaskViewModel = TaskViewModel()
     @State var isEditMode: EditMode = .inactive
     @State private var refresh = UUID()
+    @State var selectedItems: Set<UUID> = Set<UUID>()
 
     init() {
     }
@@ -18,48 +19,51 @@ struct Home: View {
     var body: some View {
         List {
             if (isEditMode != .active) {
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
-                    ForEach(0..<taskViewModel.selectedCards.count - (taskViewModel.selectedCards.count % 2 == 0 ? 0 : 1), id: \.self) { i in
-                        Button {
-                        } label: {
-                            Card(card: taskViewModel.selectedCards[i])
+                if (taskViewModel.selectedCards.count > 0) {
+                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
+                        ForEach(0..<taskViewModel.selectedCards.count - (taskViewModel.selectedCards.count % 2 == 0 ? 0 : 1), id: \.self) { i in
+                            Button {
+                            } label: {
+                                Card(card: taskViewModel.selectedCards[i])
+                            }
+                                    .padding(i % 2 == 0 ? .leading : .trailing, -20)
                         }
-                                .padding(i % 2 == 0 ? .leading : .trailing, -20)
-                    }
 
-                    if (taskViewModel.selectedCards.count % 2 == 1) {
-                        Button {
-                        } label: {
-                            Card(card: taskViewModel.selectedCards[taskViewModel.selectedCards.count - 1])
+                        if (taskViewModel.selectedCards.count % 2 == 1) {
+                            Button {
+                            } label: {
+                                Card(card: taskViewModel.selectedCards[taskViewModel.selectedCards.count - 1])
+                            }
+                                    .frame(width: 373).padding(.trailing, -175)
                         }
-                                .frame(width: 373).padding(.trailing, -175)
-                    }
-                })
-                        .padding(.top, 5)
-                        .buttonStyle(BorderlessButtonStyle())
-                        .listRowBackground(Color("CardBackground"))
+                    })
+                            .padding(.top, 5)
+                            .buttonStyle(BorderlessButtonStyle())
+                            .listRowBackground(Color("CardBackground"))
+                }
             } else {
                 ForEach(taskViewModel.cards.indices, id: \.self) { i in
-                    HStack {
-                        Button {
-                            print("1234")
-                            taskViewModel.cards[i].selected = !taskViewModel.cards[i].selected
-                        } label: {
-                            Image(systemName: "checkmark.circle.fill")
+                    Button {
+                        taskViewModel.cards[i].selected.toggle()
+                        taskViewModel.updateSelectedCardsList()
+                    } label: {
+                        HStack {
+                            Image(systemName: taskViewModel.cards[i].selected ? "checkmark.circle.fill" : "circle")
                                     .font(.system(size: 21))
-                                    .foregroundColor(taskViewModel.cards[i].selected ? Color.blue : Color.red)
+                                    .foregroundColor(Color.blue)
+                                    .ignoresSafeArea()
                                     .padding(.leading, -45)
+                            CustomIcon(icon: taskViewModel.cards[i].icon, iconColor: taskViewModel.cards[i].iconColor, iconFont: .system(size: 18, weight: .bold), iconPadding: 7)
+                                    .padding(.leading, -18)
+                            Text(taskViewModel.cards[i].title)
+                                    .foregroundColor(Color("PureWhite"))
                         }
-
-                        CustomIcon(icon: taskViewModel.cards[i].icon, iconColor: taskViewModel.cards[i].iconColor, iconFont: .system(size: 18, weight: .bold), iconPadding: 7)
-                                .padding(.leading, -18)
-                        Text(taskViewModel.cards[i].title)
                     }
                 }
-                        .onMove { (v: IndexSet, i: Int) in
-                            print("\(v) \(i)")
-                        }
+                        .onMove(perform: moveCards)
+                        .buttonStyle(PlainButtonStyle()) // I tried
                         .frame(height: 45)
+
             }
 
             Section(header: Text("My Lists").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color("PureWhite")).padding(.leading, 10)) {
@@ -92,6 +96,7 @@ struct Home: View {
             }
                     .textCase(nil)
         }
+
                 .listStyle(InsetGroupedListStyle())
                 .navigationBarTitle("", displayMode: .inline)
                 .navigationBarItems(trailing: EditButton())
@@ -101,7 +106,9 @@ struct Home: View {
                         if (isEditMode != .active) {
                             Button {
                                 print("Pressed")
-                            } label: {
+                            }
+
+                            label: {
                                 HStack {
                                     Image(systemName: "plus.circle.fill")
                                             .font(.system(size: 25))
@@ -131,4 +138,16 @@ struct Home: View {
                 }
                 .id(refresh)
     }
+
+    func moveCards(from source: IndexSet, to destination: Int) {
+        taskViewModel.cards.move(fromOffsets: source, toOffset: destination)
+        taskViewModel.updateSelectedCardsList()
+    }
+
+    func deleteLists(at offsets: IndexSet) {
+        //taskViewModel.
+        // .remove(atOffsets: offsets)
+        //taskViewModel.updateSelectedCardsList()
+    }
+
 }
