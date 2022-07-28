@@ -7,18 +7,15 @@
 
 import SwiftUI
 
-struct ContentView3: View {
-    init() {
-    }
-
+struct ContentView: View {
     var body: some View {
         CustomNavigationView(view: Home())
                 .ignoresSafeArea()
     }
 }
 
-struct ContentView3_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView3()
+        ContentView()
     }
 }
