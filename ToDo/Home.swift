@@ -21,19 +21,18 @@ struct Home: View {
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
                     ForEach(0..<taskViewModel.selectedCards.count - (taskViewModel.selectedCards.count % 2 == 0 ? 0 : 1), id: \.self) { i in
                         Button {
-
                         } label: {
-                            Card(card: taskViewModel.selectedCards[i]).padding(i % 2 == 0 ? .leading : .trailing, -20)
+                            Card(card: taskViewModel.selectedCards[i])
                         }
+                                .padding(i % 2 == 0 ? .leading : .trailing, -20)
                     }
 
                     if (taskViewModel.selectedCards.count % 2 == 1) {
                         Button {
-
                         } label: {
-                            Card(card: taskViewModel.selectedCards[taskViewModel.selectedCards.count - 1]).frame(width: 373).padding(.trailing, -175)
+                            Card(card: taskViewModel.selectedCards[taskViewModel.selectedCards.count - 1])
                         }
-
+                                .frame(width: 373).padding(.trailing, -175)
                     }
                 })
                         .padding(.top, 5)
