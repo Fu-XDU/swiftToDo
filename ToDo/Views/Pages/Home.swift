@@ -43,6 +43,7 @@ struct Home: View {
                             .listRowBackground(Color("CardBackground"))
                 }
             } else {
+                // Bug: After deleting list below, here might render wrong
                 ForEach(taskViewModel.cards.indices, id: \.self) { i in
                     Button {
                         taskViewModel.cards[i].selected.toggle()
@@ -52,7 +53,6 @@ struct Home: View {
                             Image(systemName: taskViewModel.cards[i].selected ? "checkmark.circle.fill" : "circle")
                                     .font(.system(size: 21))
                                     .foregroundColor(Color.blue)
-                                    .ignoresSafeArea()
                                     .padding(.leading, -45)
                             CustomIcon(icon: taskViewModel.cards[i].icon, iconColor: taskViewModel.cards[i].iconColor, iconFont: .system(size: 18, weight: .bold), iconPadding: 7)
                                     .padding(.leading, -18)
@@ -86,10 +86,8 @@ struct Home: View {
                         }
                     })
                 }
-                        .onDelete ( perform: deleteLists)
-                        .onMove { (v: IndexSet, i: Int) in
-                            print("\(v) \(i)")
-                        }
+                        .onDelete(perform: deleteLists)
+                        .onMove(perform: moveLists)
                         .frame(height: 45)
             }
                     .textCase(nil)
@@ -151,6 +149,10 @@ struct Home: View {
     func moveCards(from source: IndexSet, to destination: Int) {
         taskViewModel.cards.move(fromOffsets: source, toOffset: destination)
         taskViewModel.updateSelectedCardsList()
+    }
+
+    func moveLists(from source: IndexSet, to destination: Int) {
+        taskViewModel.allLists.move(fromOffsets: source, toOffset: destination)
     }
 
     func deleteLists(at offsets: IndexSet) {
