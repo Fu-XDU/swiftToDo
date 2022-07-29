@@ -19,7 +19,9 @@
 		B4B23930438EA3C8A29A41C2 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23523BDF8EF9CACC7A70F /* CustomIcon.swift */; };
 		B4B23C050A418C1C28D88A1E /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B235D58048F62B3F955454 /* ItemModel.swift */; };
 		B4B23CB77A4FFD8056208F84 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23C589D29B6F914475309 /* Home.swift */; };
+		B4B23D3483223CD926913C05 /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B239A2F2715F24C116DAED /* AddListView.swift */; };
 		B4B23DBD56DB4470ADA69F00 /* CustomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */; };
+		B4B23DC729A42BF0B2963A53 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23184AE671560E4B4D29C /* ListModel.swift */; };
 		B4B23F24B5BE3403610B7BE1 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B238640BE78E7CA42AE4B7 /* TaskViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,11 +54,13 @@
 		6FDACA1E287D51A300BF2863 /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDACA22287D51A300BF2863 /* ToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITests.swift; sourceTree = "<group>"; };
 		6FDACA24287D51A300BF2863 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4B23184AE671560E4B4D29C /* ListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		B4B23349E332348319FF0A36 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B4B233607CD1AA433D5F8933 /* ListDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
 		B4B23523BDF8EF9CACC7A70F /* CustomIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIcon.swift; sourceTree = "<group>"; };
 		B4B235D58048F62B3F955454 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		B4B238640BE78E7CA42AE4B7 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		B4B239A2F2715F24C116DAED /* AddListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
 		B4B239C64DD5FC70D0E500BE /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
 		B4B23C0E562DA0E437661D3B /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				B4B23523BDF8EF9CACC7A70F /* CustomIcon.swift */,
 				B4B23C0E562DA0E437661D3B /* CardView.swift */,
 				B4B23CB2B90E10BCF04C4F54 /* Pages */,
+				B4B239A2F2715F24C116DAED /* AddListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 			children = (
 				B4B235D58048F62B3F955454 /* ItemModel.swift */,
 				B4B239C64DD5FC70D0E500BE /* CardModel.swift */,
+				B4B23184AE671560E4B4D29C /* ListModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -329,6 +335,8 @@
 				B4B23416B395AEBC34A30C96 /* CardModel.swift in Sources */,
 				B4B236D40F61BE8AD08F5530 /* CardView.swift in Sources */,
 				B4B23CB77A4FFD8056208F84 /* Home.swift in Sources */,
+				B4B23DC729A42BF0B2963A53 /* ListModel.swift in Sources */,
+				B4B23D3483223CD926913C05 /* AddListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

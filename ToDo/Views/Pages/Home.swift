@@ -11,7 +11,8 @@ struct Home: View {
     @StateObject var taskViewModel: TaskViewModel = TaskViewModel()
     @State var isEditMode: EditMode = .inactive
     @State private var refresh = UUID()
-    @State var selectedItems: Set<UUID> = Set<UUID>()
+    @State private var showingAddListSheet = false
+    @State private var showingNewReminderSheet = false
 
     init() {
     }
@@ -63,18 +64,17 @@ struct Home: View {
                         .onMove(perform: moveCards)
                         .buttonStyle(PlainButtonStyle()) // I tried
                         .frame(height: 45)
-
             }
 
             Section(header: Text("My Lists").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color("PureWhite")).padding(.leading, 10)) {
-                ForEach(taskViewModel.undoneItems.indices, id: \.self) { i in
+                ForEach(taskViewModel.allLists.indices, id: \.self) { i in
                     NavigationLink(destination: ListDetailView().onAppear {
                         refresh = UUID()
                     }, label: {
                         HStack {
                             CustomIcon(icon: "list.bullet", iconColor: Color.blue, iconFont: .system(size: 16, weight: .bold), iconPadding: 9)
                                     .padding(.leading, -10)
-                            Text("Title")
+                            Text(taskViewModel.allLists[i].name)
                             Spacer()
                             if (isEditMode == .active) {
                                 Image(systemName: "info.circle")
@@ -86,9 +86,7 @@ struct Home: View {
                         }
                     })
                 }
-                        .onDelete { index in
-                            print("\(index)")
-                        }
+                        .onDelete ( perform: deleteLists)
                         .onMove { (v: IndexSet, i: Int) in
                             print("\(v) \(i)")
                         }
@@ -105,35 +103,46 @@ struct Home: View {
                     ToolbarItemGroup(placement: .bottomBar) {
                         if (isEditMode != .active) {
                             Button {
-                                print("Pressed")
+                                showingNewReminderSheet = true
                             }
-
                             label: {
                                 HStack {
                                     Image(systemName: "plus.circle.fill")
                                             .font(.system(size: 25))
-                                            .foregroundColor(Color.blue)
+                                            .foregroundColor(taskViewModel.allLists.count == 0 ? Color.gray : Color.blue)
                                     Text("New Reminder")
                                             .bold()
                                 }
                             }
+                                    .disabled(taskViewModel.allLists.count == 0)
+                                    .sheet(isPresented: $showingNewReminderSheet) {
+                                        NavigationView {
+                                            //AddListView()
+                                        }
+                                    }
                         } else {
                             Button {
-                                print("Pressed")
+                                showingNewReminderSheet = true
                             } label: {
                                 HStack {
                                     Text("Add Group")
                                 }
                             }
+                                    .disabled(taskViewModel.allLists.count == 0)
                         }
                         Spacer()
                         Button {
-                            print("Pressed")
+                            showingAddListSheet = true
                         } label: {
                             HStack {
                                 Text("Add List")
                             }
                         }
+                                .sheet(isPresented: $showingAddListSheet) {
+                                    NavigationView {
+                                        AddListView(showingAddListSheet: $showingAddListSheet).environmentObject(taskViewModel)
+                                    }
+                                }
                     }
                 }
                 .id(refresh)
@@ -145,8 +154,7 @@ struct Home: View {
     }
 
     func deleteLists(at offsets: IndexSet) {
-        //taskViewModel.
-        // .remove(atOffsets: offsets)
+        taskViewModel.allLists.remove(atOffsets: offsets)
         //taskViewModel.updateSelectedCardsList()
     }
 

@@ -8,31 +8,17 @@ struct ItemModel: Identifiable {
     let id = UUID()
     var title: String
     var done: Bool
-    var favorite: Bool
+    var notes: String
 
     init() {
-        title = "test"
+        title = ""
         done = false
-        favorite = false
+        notes = ""
     }
 
-    init(title: String, done: Bool, favorite: Bool) {
+    init(title: String, done: Bool, notes: String) {
         self.title = title
         self.done = done
-        self.favorite = favorite
-    }
-
-    init(done: Bool, favorite: Bool) {
-        title = "test"
-        self.done = done
-        self.favorite = favorite
-    }
-
-    mutating func changeFavorite() {
-        favorite = !favorite
-    }
-
-    mutating func changeDone() {
-        done = !done
+        self.notes = notes
     }
 }
