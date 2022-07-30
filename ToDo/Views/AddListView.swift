@@ -10,28 +10,112 @@ struct AddListView: View {
     @Binding var showingAddListSheet: Bool
     @State var title: String = ""
 
+    var colors: [Color] = [.red, .orange, .yellow, .green, Color("systemCyan"), .blue, Color("systemIndigo"), .pink, .purple, Color("systemBrown")]
+    var icons: [String] = ["list.bullet","list.bullet","mappin","gift.fill","","graduationcap.fill","","","","book.fill","","creditcard.fill","house.fill","building.columns.fill","building.2.fill","gamecontroller.fill","leaf.fill","pills.fill","shippingbox.fill","cart.fill","","","","","","","","","headphones","leaf.fill","","","","","","","","","",""]
+    var columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    @State var selectedColorIndex = 0
+    @State var selectedIconIndex = 0
+    @State var textFieldColor: Color = Color("textFieldUneditingBg")
+
     var body: some View {
 
         VStack {
-            CustomIcon(icon: "list.bullet", iconColor: Color.blue, iconFont: .system(size: 45, weight: .bold), iconPadding: 28)
+//            CustomIcon(icon: icons[selectedIconIndex], iconColor: colors[selectedColorIndex], iconFont: .system(size: 45, weight: .bold), iconPadding: 28)
                     //.shadow(color: Color.white, radius: 10)
+            ZStack {
+                Circle()
+                        .fill(colors[selectedColorIndex])
+                        .frame(height: 95)
+                        .padding(5)
+
+                Image(systemName: icons[selectedIconIndex])
+                        .font(.system(size: 45, weight: .bold))
+                        .foregroundColor(Color.white)
+                        .padding(10)
+                        .clipShape(Circle())
+                        .padding(5)
+            }
                     .padding()
-            TextField("输入",
+                    .padding([.vertical], 10)
+            TextField("",
                     text: $title,
-                    onEditingChanged: { isEditing in
-                        //print("onEditingChanged::\($title)")
+                    onEditingChanged: { (editingChanged) in
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            textFieldColor = Color(editingChanged ? "textFieldEditingBg" : "textFieldUneditingBg")
+                        }
                     },
                     onCommit: {
-                        //print("onCommit::\($title)")
+                        // print("onCommit::\($title)")
                     })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .foregroundColor(colors[selectedColorIndex])
+                    .frame(height: 60)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding([.horizontal], 20)
+                    .cornerRadius(10)
+                    .background(RoundedRectangle(cornerRadius: 16).fill(textFieldColor))
+                    .padding([.horizontal], 24)
+                    .multilineTextAlignment(.center)
+
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
-                    ForEach(0..<10) { element in
-                        CustomIcon(icon: "list.bullet", iconColor: Color.blue, iconFont: .system(size: 20, weight: .bold), iconPadding: 4)
+                LazyVGrid(columns: columns, alignment: .center, spacing: 15, content: {
+                    ForEach(colors.indices, id: \.self) { i in
+                        ZStack {
+                            Circle()
+                                    .fill(colors[i])
+                                    .frame(height: 43)
+                                    .onTapGesture(perform: {
+                                        selectedColorIndex = i
+                                    })
+                                    .padding(5)
+
+                            if selectedColorIndex == i {
+                                Circle()
+                                        .stroke(Color("colorCircle"), lineWidth: 3)
+                            }
+                        }
+
                     }
                 })
+                        .padding()
+
+                LazyVGrid(columns: columns, alignment: .center, spacing: 15, content: {
+                    ZStack {
+                        Image(systemName: "face.smiling.fill")
+                                .font(.system(size: 25, weight: .bold))
+                                .foregroundColor(Color(red: 0.21, green: 0.51, blue: 1))
+                                .padding(7)
+                                .background(Color(red: 0.21, green: 0.51, blue: 1, opacity: 0.3))
+                                .clipShape(Circle())
+
+                    }
+                    ForEach(icons.indices, id: \.self) { i in
+                        ZStack {
+                            Circle()
+                                    .fill(Color.gray.opacity(0.13))
+                                    .frame(height: 43)
+                                    .padding(5)
+
+                            Image(systemName: icons[i])
+                                    .font(.system(size: 22, weight: .bold))
+                                    .foregroundColor(Color.white)
+                                    .padding(7)
+                                    .clipShape(Circle())
+                                    .padding(5)
+
+                            if selectedIconIndex == i {
+                                Circle()
+                                        .stroke(Color("colorCircle"), lineWidth: 3)
+                            }
+                        }
+                                .onTapGesture(perform: {
+                                    selectedIconIndex = i
+                                })
+
+                    }
+                })
+                        .padding()
+                        .padding(.top, -20)
             }
         }
                 .navigationBarTitle("New List", displayMode: .inline)
@@ -46,15 +130,18 @@ struct AddListView: View {
                     ToolbarItem(placement: .confirmationAction) {
                         Button {
                             showingAddListSheet = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                taskViewModel.addList(list: ListModel(name: title, icon: "list.bullet", iconColor: Color.blue, items: []))
-                            }
+                            saveList()
                         } label: {
                             Text("Done")
                         }
                                 .disabled(title == "")
                     }
                 }
+    }
 
+    func saveList() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            taskViewModel.addList(list: ListModel(name: title, icon: icons[selectedIconIndex], iconColor: colors[selectedColorIndex], items: []))
+        }
     }
 }

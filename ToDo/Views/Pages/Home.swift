@@ -11,7 +11,7 @@ struct Home: View {
     @StateObject var taskViewModel: TaskViewModel = TaskViewModel()
     @State var isEditMode: EditMode = .inactive
     @State private var refresh = UUID()
-    @State private var showingAddListSheet = false
+    @State private var showingAddListSheet = true
     @State private var showingNewReminderSheet = false
 
     init() {
@@ -72,7 +72,7 @@ struct Home: View {
                         refresh = UUID()
                     }, label: {
                         HStack {
-                            CustomIcon(icon: "list.bullet", iconColor: Color.blue, iconFont: .system(size: 16, weight: .bold), iconPadding: 9)
+                            CustomIcon(icon: taskViewModel.allLists[i].icon, iconColor: taskViewModel.allLists[i].iconColor, iconFont: .system(size: 16, weight: .bold), iconPadding: 9)
                                     .padding(.leading, -10)
                             Text(taskViewModel.allLists[i].name)
                             Spacer()
