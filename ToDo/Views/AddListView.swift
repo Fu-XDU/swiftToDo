@@ -9,9 +9,11 @@ struct AddListView: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
     @Binding var showingAddListSheet: Bool
     @State var title: String = ""
+    @State var askBeforeCancel: Bool = false
+    @State private var showActionSheet = false
 
     var colors: [Color] = [.red, .orange, .yellow, .green, Color("systemCyan"), .blue, Color("systemIndigo"), .pink, .purple, Color("systemBrown")]
-    var icons: [String] = ["list.bullet","list.bullet","mappin","gift.fill","","graduationcap.fill","","","","book.fill","","creditcard.fill","house.fill","building.columns.fill","building.2.fill","gamecontroller.fill","leaf.fill","pills.fill","shippingbox.fill","cart.fill","","","","","","","","","headphones","leaf.fill","","","","","","","","","",""]
+    var icons: [String] = ["list.bullet", "list.bullet", "mappin", "gift.fill", "", "graduationcap.fill", "", "", "", "book.fill", "", "creditcard.fill", "house.fill", "building.columns.fill", "building.2.fill", "gamecontroller.fill", "leaf.fill", "pills.fill", "shippingbox.fill", "cart.fill", "", "", "", "", "", "", "", "", "headphones", "leaf.fill", "", "", "", "", "", "", "", "", "", ""]
     var columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State var selectedColorIndex = 0
     @State var selectedIconIndex = 0
@@ -20,8 +22,7 @@ struct AddListView: View {
     var body: some View {
 
         VStack {
-//            CustomIcon(icon: icons[selectedIconIndex], iconColor: colors[selectedColorIndex], iconFont: .system(size: 45, weight: .bold), iconPadding: 28)
-                    //.shadow(color: Color.white, radius: 10)
+
             ZStack {
                 Circle()
                         .fill(colors[selectedColorIndex])
@@ -37,6 +38,7 @@ struct AddListView: View {
             }
                     .padding()
                     .padding([.vertical], 10)
+            //.shadow(color: Color.white, radius: 10)
             TextField("",
                     text: $title,
                     onEditingChanged: { (editingChanged) in
@@ -66,6 +68,7 @@ struct AddListView: View {
                                     .frame(height: 43)
                                     .onTapGesture(perform: {
                                         selectedColorIndex = i
+                                        askBeforeCancel = true
                                     })
                                     .padding(5)
 
@@ -110,19 +113,42 @@ struct AddListView: View {
                         }
                                 .onTapGesture(perform: {
                                     selectedIconIndex = i
+                                    askBeforeCancel = true
                                 })
-
                     }
                 })
                         .padding()
                         .padding(.top, -20)
             }
+                    .actionSheet(isPresented: $showActionSheet) {
+                        ActionSheet(
+                                title: Text("Save"),
+                                //message: Text("Choose a destination for workout data"),
+                                buttons: [
+                                    .cancel(),
+                                    .destructive(
+                                            Text("Discard Changes")
+                                    ) {
+                                        showingAddListSheet = false
+                                    }
+//                                    .default(
+//                                            Text("Append to Current Workout")
+//                                    ) {
+//                                        print("123")
+//                                    }
+                                ]
+                        )
+                    }
         }
                 .navigationBarTitle("New List", displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button {
-                            showingAddListSheet = false
+                            if (title != "" || askBeforeCancel) {
+                                showActionSheet = true
+                            } else {
+                                showingAddListSheet = false
+                            }
                         } label: {
                             Text("Cancel")
                         }
