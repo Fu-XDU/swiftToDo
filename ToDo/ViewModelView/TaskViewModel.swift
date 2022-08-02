@@ -34,6 +34,12 @@ class TaskViewModel: ObservableObject {
         ]
         cards.append(contentsOf: newCardItems)
 
+        let newListItems = [
+            // Use "Note" with today date
+            ListModel(name: "hello", icon: "note.text", iconColor: Color.blue, items: [])
+        ]
+        allLists.append(contentsOf: newListItems)
+
         updateSelectedCardsList()
     }
 

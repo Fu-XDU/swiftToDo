@@ -11,7 +11,7 @@ struct Home: View {
     @StateObject var taskViewModel: TaskViewModel = TaskViewModel()
     @State var isEditMode: EditMode = .inactive
     @State private var refresh = UUID()
-    @State private var showingAddListSheet = true
+    @State private var showingAddListSheet = false
     @State private var showingNewReminderSheet = false
 
     init() {
@@ -115,7 +115,7 @@ struct Home: View {
                                     .disabled(taskViewModel.allLists.count == 0)
                                     .sheet(isPresented: $showingNewReminderSheet) {
                                         NavigationView {
-                                            //AddListView()
+                                            NewReminderView(showNewReminderSheet: $showingNewReminderSheet).environmentObject(taskViewModel)
                                         }
                                     }
                         } else {

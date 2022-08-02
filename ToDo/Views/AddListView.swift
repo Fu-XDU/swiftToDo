@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct AddListView: View {
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var taskViewModel: TaskViewModel
     @Binding var showingAddListSheet: Bool
     @State var title: String = ""
@@ -20,9 +20,7 @@ struct AddListView: View {
     @State var textFieldColor: Color = Color("textFieldUneditingBg")
 
     var body: some View {
-
         VStack {
-
             ZStack {
                 Circle()
                         .fill(colors[selectedColorIndex])
@@ -101,7 +99,7 @@ struct AddListView: View {
 
                             Image(systemName: icons[i])
                                     .font(.system(size: 22, weight: .bold))
-                                    .foregroundColor(Color.white)
+                                    .foregroundColor(Color("SFColor"))
                                     .padding(7)
                                     .clipShape(Circle())
                                     .padding(5)
@@ -160,7 +158,7 @@ struct AddListView: View {
                         } label: {
                             Text("Done")
                         }
-                                .disabled(title == "")
+                                .disabled(title.isEmpty)
                     }
                 }
     }

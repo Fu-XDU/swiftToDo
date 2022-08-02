@@ -29,7 +29,6 @@ struct Card: View {
     }
 
     var body: some View {
-
         VStack(alignment: .leading) {
             HStack {
                 CustomIcon(icon: icon, iconColor: iconColor, iconFont: .system(size: 18, weight: .regular), iconPadding: 7)
