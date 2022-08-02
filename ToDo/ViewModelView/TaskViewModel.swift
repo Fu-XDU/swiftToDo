@@ -56,6 +56,9 @@ class TaskViewModel: ObservableObject {
         allLists.append(list)
     }
 
+    func addReminder(listIndex: Int, reminder: ItemModel) {
+        allLists[listIndex].items.append(reminder)
+    }
 
     func getItemIndex(items: [ItemModel], id: UUID) -> Int {
         var i = 0;

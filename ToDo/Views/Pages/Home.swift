@@ -81,7 +81,7 @@ struct Home: View {
                                         .foregroundColor(.blue)
                                         .font(.system(size: 22))
                             } else {
-                                Text("0").foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
+                                Text("\(taskViewModel.allLists[i].items.count)").foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
                             }
                         }
                     })

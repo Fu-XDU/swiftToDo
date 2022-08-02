@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct NewReminderView: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
@@ -14,9 +15,11 @@ struct NewReminderView: View {
     @State var askBeforeCancel: Bool = false
     @State private var showActionSheet = false
 
+    @State private var listIndex: Int = 0
     @State private var title: String = ""
     @State private var notes: String = ""
     @State private var notesPlaceholder: String = "Notes"
+
 
 //    init() {
 //        UITableView.appearance().sectionFooterHeight = 1
@@ -48,8 +51,8 @@ struct NewReminderView: View {
                     HStack {
                         Text("List")
                         Spacer()
-                        taskViewModel.allLists[0].iconColor.clipShape(Circle()).frame(width: 8, height: 8)
-                        Text(taskViewModel.allLists[0].name).foregroundColor(Color.gray)
+                        taskViewModel.allLists[listIndex].iconColor.clipShape(Circle()).frame(width: 8, height: 8)
+                        Text(taskViewModel.allLists[listIndex].name).foregroundColor(Color.gray)
                     }
                 }
             }
@@ -69,8 +72,8 @@ struct NewReminderView: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button {
-//                            showingAddListSheet = false
-//                            saveList()
+                            showNewReminderSheet = false
+                            saveReminder()
                         } label: {
                             Text("Add")
                         }
@@ -97,7 +100,14 @@ struct NewReminderView: View {
                     )
                 }
                 .padding(.top, -70)
-                .environment(\.defaultMinListRowHeight, 55).environment(\.defaultMinListHeaderHeight, 0) // HERE
+                .environment(\.defaultMinListRowHeight, 55)
+                .environment(\.defaultMinListHeaderHeight, 0)
+    }
+
+    func saveReminder() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            taskViewModel.addReminder(listIndex: listIndex, reminder: ItemModel(title: title, done: false, notes: notes))
+        }
     }
 }
 
