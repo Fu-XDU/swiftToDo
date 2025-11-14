@@ -7,67 +7,32 @@ import SwiftUI
 
 class TaskViewModel: ObservableObject {
     @Published var cards: [CardModel] = []
-    @Published var selectedCards: [CardModel] = []
-    @Published var allLists: [ListModel] = []
+    @Published var lists: [ListModel] = []
 
     init() {
-        getItems()
-    }
-
-
-    func getSelectedItems() -> [CardModel] {
-        var newCardItems: [CardModel] = []
-        for item in cards {
-            if (item.selected) {
-                newCardItems.append(item)
-            }
-        }
-        return newCardItems
-    }
-
-    func getItems() {
         let newCardItems = [
             // Use "Note" with today date
-            CardModel(title: "Today", count: 0, icon: "note.text", iconColor: Color.blue, selected: true),
-            CardModel(title: "Scheduled", count: 0, icon: "calendar", iconColor: Color.red, selected: true),
-            CardModel(title: "All", count: 0, icon: "tray.fill", iconColor: Color(red: 0.36, green: 0.38, blue: 0.41), selected: true)
+            CardModel(title: "今天", count: 0, icon: "note.text", iconColor: Color.blue, selected: true),
+            CardModel(title: "计划", count: 0, icon: "calendar", iconColor: Color.red, selected: true),
+            CardModel(title: "全部", count: 0, icon: "tray.fill", iconColor: Color.gray, selected: true),
+            CardModel(title: "旗标", count: 0, icon: "flag.fill", iconColor: Color.yellow, selected: true),
+            CardModel(title: "完成", count: 0, icon: "checkmark", iconColor: Color.gray, selected: true),
+            CardModel(title: "分配给我", count: 0, icon: "person.fill", iconColor: Color.green, selected: true),
         ]
         cards.append(contentsOf: newCardItems)
 
         let newListItems = [
             // Use "Note" with today date
-            ListModel(name: "hello", icon: "note.text", iconColor: Color.blue, items: [])
+            ListModel(name: "hello", icon: "note.text", iconColor: Color.blue, items: []),
         ]
-        allLists.append(contentsOf: newListItems)
-
-        updateSelectedCardsList()
-    }
-
-    func updateSelectedCardsList() {
-        selectedCards = []
-        for item in cards {
-            if (item.selected) {
-                selectedCards.append(item)
-            }
-        }
+        lists.append(contentsOf: newListItems)
     }
 
     func addList(list: ListModel) {
-        allLists.append(list)
+        lists.append(list)
     }
 
     func addReminder(listIndex: Int, reminder: ItemModel) {
-        allLists[listIndex].items.append(reminder)
-    }
-
-    func getItemIndex(items: [ItemModel], id: UUID) -> Int {
-        var i = 0;
-        for item in items {
-            if (item.id == id) {
-                return i
-            }
-            i += 1
-        }
-        return -1
+        lists[listIndex].items.append(reminder)
     }
 }

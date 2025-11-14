@@ -51,8 +51,8 @@ struct NewReminderView: View {
                     HStack {
                         Text("List")
                         Spacer()
-                        taskViewModel.allLists[listIndex].iconColor.clipShape(Circle()).frame(width: 8, height: 8)
-                        Text(taskViewModel.allLists[listIndex].name).foregroundColor(Color.gray)
+                        taskViewModel.lists[listIndex].iconColor.clipShape(Circle()).frame(width: 8, height: 8)
+                        Text(taskViewModel.lists[listIndex].name).foregroundColor(Color.gray)
                     }
                 }
             }
