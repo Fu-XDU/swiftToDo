@@ -4,144 +4,250 @@
 
 import SwiftUI
 
+// MARK: - Constants
+private enum Constants {
+    static let rowHeight: CGFloat = 40
+    static let cardHeight: CGFloat = 83
+    static let cardSpacing: CGFloat = 15
+    static let cardTopPadding: CGFloat = 5
+    static let iconSize: CGFloat = 21
+    static let cardIconSize: CGFloat = 18
+    static let listIconSize: CGFloat = 16
+    static let sectionHeaderFontSize: CGFloat = 22
+    static let toolbarIconSize: CGFloat = 25
+    static let itemCountGray = Color(red: 0.55, green: 0.55, blue: 0.55)
+
+    // Section header 内边距
+    static let sectionHeaderInsets = EdgeInsets(top: 0, leading: 10, bottom: 4, trailing: 0)
+}
+
+// MARK: - CardRow View
 struct CardRow: View {
     @Binding var card: CardModel
 
     var body: some View {
         HStack {
             Image(systemName: card.selected ? "checkmark.circle.fill" : "circle")
-                .font(.system(size: 21))
+                .font(.system(size: Constants.iconSize))
                 .foregroundColor(.blue)
-            CustomIcon(icon: card.icon, iconColor: card.iconColor, iconFont: .system(size: 18, weight: .bold), iconPadding: 7)
+            CustomIcon(
+                icon: card.icon,
+                iconColor: card.iconColor,
+                iconFont: .system(size: Constants.cardIconSize, weight: .bold),
+                iconPadding: 7
+            )
             Text(card.title)
             Spacer()
         }
-        .frame(height: 45)
+        .frame(height: Constants.rowHeight)
         .contentShape(Rectangle())
         .onTapGesture { card.selected.toggle() }
     }
 }
 
+// MARK: - ListRow View
+struct ListRow: View {
+    let list: ListModel
+    let isEditMode: Bool
+
+    var body: some View {
+        HStack {
+            CustomIcon(
+                icon: list.icon,
+                iconColor: list.iconColor,
+                iconFont: .system(size: Constants.listIconSize, weight: .bold),
+                iconPadding: 9
+            )
+            .padding(.leading, -10)
+            Text(list.name)
+            Spacer()
+            if isEditMode {
+                Image(systemName: "info.circle")
+                    .foregroundColor(.blue)
+                    .font(.system(size: Constants.iconSize))
+            } else {
+                Text("\(list.items.count)")
+                    .foregroundColor(Constants.itemCountGray)
+            }
+        }
+    }
+}
+
+// MARK: - Home View
 struct Home: View {
     @StateObject var taskViewModel: TaskViewModel = TaskViewModel()
     @State var isEditMode: EditMode = .inactive
-    @State private var refresh = UUID()
     @State private var showingAddListSheet = false
     @State private var showingNewReminderSheet = false
+    @State private var searchText: String = ""
 
     init() {
     }
 
     var body: some View {
-        List {
-            if isEditMode != .active {
-                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 15), GridItem(.flexible())], alignment: .center, spacing: 15, content: {
-                        ForEach($taskViewModel.cards, id: \.id) { $card in
-                            if (card.selected){
-                                Button {
-                                } label: {
-                                    Card(card: card).height(83)
-                                }
-                            }
-                        }
-                    })
-                    .listRowInsets(EdgeInsets())
-                    .listRowBackground(Color.clear)
-                    .padding(.top, 5)
-//                    .padding(.top, 120)
-
-            } else {
-                // Bug: After deleting list below, here might render wrong
-                ForEach($taskViewModel.cards, id: \.id) { $card in
-                    CardRow(card: $card)
-                }
-                .onMove(perform: moveCards)
-                .buttonStyle(PlainButtonStyle()) // I tried
-                .frame(height: 45)
-            }
-
-            Section(header: Text("My Lists").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color("PureBlack"))) {
-                ForEach(taskViewModel.lists.indices, id: \.self) { i in
-                    NavigationLink(destination: ListDetailView().onAppear {
-                        refresh = UUID()
-                    }, label: {
-                        HStack {
-                            CustomIcon(icon: taskViewModel.lists[i].icon, iconColor: taskViewModel.lists[i].iconColor, iconFont: .system(size: 16, weight: .bold), iconPadding: 9)
-                                .padding(.leading, -10)
-                            Text(taskViewModel.lists[i].name)
-                            Spacer()
-                            if isEditMode == .active {
-                                Image(systemName: "info.circle")
-                                    .foregroundColor(.blue)
-                                    .font(.system(size: 22))
-                            } else {
-                                Text("\(taskViewModel.lists[i].items.count)").foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
-                            }
-                        }
-                    })
-                }
-                .onDelete(perform: deleteLists)
-                .onMove(perform: moveLists)
-                .frame(height: 45)
-            }
-            .textCase(nil)
-        }
-
-        .listStyle(InsetGroupedListStyle())
-        .navigationBarTitle("", displayMode: .inline)
-        .navigationBarItems(trailing: EditButton())
-        .environment(\.editMode, $isEditMode)
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
+        NavigationView {
+            ScrollView {
                 if isEditMode != .active {
-                    Button {
-                        showingNewReminderSheet = true
-                    }
-                            label: {
-                        HStack {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.system(size: 25))
-                                .foregroundColor(taskViewModel.lists.count == 0 ? Color.gray : Color.blue)
-                            Text("New Reminder")
-                                .bold()
-                        }
-                    }
-                    .disabled(taskViewModel.lists.count == 0)
-                    .sheet(isPresented: $showingNewReminderSheet) {
-                        NavigationView {
-                            NewReminderView(showNewReminderSheet: $showingNewReminderSheet).environmentObject(taskViewModel)
-                        }
-                    }
+                    cardsGridView
                 } else {
-                    Button {
-                        showingNewReminderSheet = true
-                    } label: {
-                        HStack {
-                            Text("Add Group")
-                        }
-                    }
-                    .disabled(taskViewModel.lists.count == 0)
+                    cardsEditView
+                        .padding(EdgeInsets(top: -30, leading: 0, bottom: -25, trailing: 0))
                 }
-                Spacer()
-                Button {
-                    showingAddListSheet = true
-                } label: {
-                    HStack {
-                        Text("Add List")
+                List {
+                    listsSection
+                }
+                .padding(.top, 5)
+                .frame(height: 100)
+            }.listStyle(InsetGroupedListStyle())
+                .listRowInsets(EdgeInsets())
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarItems(trailing: EditButton())
+                .environment(\.editMode, $isEditMode)
+                .searchable(
+                    text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic),
+                    prompt: "搜索"
+                ).toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        bottomToolbarContent
                     }
                 }
-                .sheet(isPresented: $showingAddListSheet) {
-                    NavigationView {
-                        AddListView(showingAddListSheet: $showingAddListSheet).environmentObject(taskViewModel)
-                    }
-                }
-            }
+                .background(Color("CardBackground"))
         }
-        .id(refresh)
     }
 
+    // MARK: - Cards Grid View
+    private var cardsGridView: some View {
+        LazyVGrid(
+            columns: [
+                GridItem(.flexible(), spacing: Constants.cardSpacing),
+                GridItem(.flexible()),
+            ],
+            alignment: .center,
+            spacing: Constants.cardSpacing
+        ) {
+            ForEach($taskViewModel.cards, id: \.id) { $card in
+                if card.selected {
+                    Button {
+                        // TODO: 添加卡片点击导航功能
+                    } label: {
+                        Card(card: card).height(Constants.cardHeight)
+                    }
+                    .contextMenu {
+                        Section("全部") {
+                            Button {
+                            } label: {
+                                Label("隐藏", systemImage: "eye.slash")
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, Constants.cardTopPadding)
+    }
+
+    // MARK: - Cards Edit View
+    private var cardsEditView: some View {
+        List {
+            ForEach($taskViewModel.cards, id: \.id) { $card in
+                CardRow(card: $card)
+            }
+            .onMove(perform: moveCards)
+            .buttonStyle(PlainButtonStyle())
+            .frame(height: Constants.rowHeight)
+        }
+        .frame(height: 430)
+    }
+
+    // MARK: - Lists Section
+    private var listsSection: some View {
+        Section(
+            header: HStack {
+                Text("我的列表")
+                    .font(
+                        .system(
+                            size: Constants.sectionHeaderFontSize, weight: .bold, design: .rounded)
+                    )
+                    .foregroundColor(Color("PureBlack"))
+                Spacer()
+            }
+            .listRowInsets(Constants.sectionHeaderInsets)
+        ) {
+            ForEach(taskViewModel.lists, id: \.id) { list in
+                if isEditMode == .active {
+                    // 编辑模式下不显示箭头，直接显示内容
+                    ListRow(list: list, isEditMode: true)
+                } else {
+                    // 非编辑模式下显示 NavigationLink（带箭头）
+                    NavigationLink(
+                        destination: ListDetailView(),
+                        label: {
+                            ListRow(list: list, isEditMode: false)
+                        }
+                    )
+                }
+            }
+            .onDelete(perform: deleteLists)
+            .onMove(perform: moveLists)
+            .frame(height: Constants.rowHeight)
+
+        }
+        .textCase(nil)
+    }
+
+    // MARK: - Bottom Toolbar Content
+    @ViewBuilder
+    private var bottomToolbarContent: some View {
+        if isEditMode != .active {
+            Button {
+                showingNewReminderSheet = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: Constants.toolbarIconSize))
+                        .foregroundColor(
+                            taskViewModel.lists.isEmpty ? Color.gray : Color.blue
+                        )
+                    Text("New Reminder")
+                        .bold()
+                }
+            }
+            .disabled(taskViewModel.lists.isEmpty)
+            .sheet(isPresented: $showingNewReminderSheet) {
+                NavigationView {
+                    NewReminderView(showNewReminderSheet: $showingNewReminderSheet)
+                        .environmentObject(taskViewModel)
+                }
+            }
+        } else {
+            Button {
+                showingNewReminderSheet = true
+            } label: {
+                Text("Add Group")
+            }
+            .disabled(taskViewModel.lists.isEmpty)
+        }
+
+        Spacer()
+
+        Button {
+            showingAddListSheet = true
+        } label: {
+            Text("Add List")
+        }
+        .sheet(isPresented: $showingAddListSheet) {
+            NavigationView {
+                AddListView(showingAddListSheet: $showingAddListSheet)
+                    .environmentObject(taskViewModel)
+            }
+        }
+    }
+
+    // MARK: - Helper Functions
     func moveCards(from source: IndexSet, to destination: Int) {
-         taskViewModel.cards.move(fromOffsets: source, toOffset: destination)
+        taskViewModel.cards.move(fromOffsets: source, toOffset: destination)
     }
 
     func moveLists(from source: IndexSet, to destination: Int) {
@@ -155,19 +261,7 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        let compare: Bool = true
-        if !compare {
-            ZStack {
-                Image("TempImage")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.all)
-                CustomNavigationView(view: Home())
-                    .ignoresSafeArea()
-                    .opacity(0.5)
-            }
-        } else {
-            CustomNavigationView(view: Home())
-                .ignoresSafeArea()
-        }
+        Home()
+            .ignoresSafeArea()
     }
 }

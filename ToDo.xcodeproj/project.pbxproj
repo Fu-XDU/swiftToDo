@@ -21,7 +21,6 @@
 		B4B23C050A418C1C28D88A1E /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B235D58048F62B3F955454 /* ItemModel.swift */; };
 		B4B23CB77A4FFD8056208F84 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23C589D29B6F914475309 /* Home.swift */; };
 		B4B23D3483223CD926913C05 /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B239A2F2715F24C116DAED /* AddListView.swift */; };
-		B4B23DBD56DB4470ADA69F00 /* CustomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */; };
 		B4B23DC729A42BF0B2963A53 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B23184AE671560E4B4D29C /* ListModel.swift */; };
 		B4B23F24B5BE3403610B7BE1 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B238640BE78E7CA42AE4B7 /* TaskViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -64,7 +63,6 @@
 		B4B238640BE78E7CA42AE4B7 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		B4B239A2F2715F24C116DAED /* AddListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
 		B4B239C64DD5FC70D0E500BE /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
-		B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
 		B4B23C0E562DA0E437661D3B /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B4B23C589D29B6F914475309 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,7 +164,6 @@
 		B4B23A4729AE55E121B7CA5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B4B23BCE8EC6FC15A609096D /* CustomNavView.swift */,
 				B4B233607CD1AA433D5F8933 /* ListDetailView.swift */,
 				B4B23523BDF8EF9CACC7A70F /* CustomIcon.swift */,
 				B4B23C0E562DA0E437661D3B /* CardView.swift */,
@@ -333,7 +330,6 @@
 				B4B23C050A418C1C28D88A1E /* ItemModel.swift in Sources */,
 				B4B23F24B5BE3403610B7BE1 /* TaskViewModel.swift in Sources */,
 				B4B233ADA514CCC7C5C64913 /* ContentView.swift in Sources */,
-				B4B23DBD56DB4470ADA69F00 /* CustomNavView.swift in Sources */,
 				B4B233D2BACB0A55BE39C6DE /* ListDetailView.swift in Sources */,
 				B4B23930438EA3C8A29A41C2 /* CustomIcon.swift in Sources */,
 				B4B23416B395AEBC34A30C96 /* CardModel.swift in Sources */,
@@ -427,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -482,7 +478,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -502,7 +498,7 @@
 				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ToDo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -524,7 +520,7 @@
 				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ToDo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -544,7 +540,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				INFOPLIST_FILE = ToDoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,7 +562,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CB87R7VGY;
 				INFOPLIST_FILE = ToDoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

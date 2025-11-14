@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        CustomNavigationView(view: Home())
+        Home()
             .ignoresSafeArea()
     }
 }

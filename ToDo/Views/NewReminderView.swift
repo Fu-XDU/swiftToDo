@@ -99,7 +99,7 @@ struct NewReminderView: View {
                             ]
                     )
                 }
-                .padding(.top, -70)
+                .padding(.top, -30)
                 .environment(\.defaultMinListRowHeight, 55)
                 .environment(\.defaultMinListHeaderHeight, 0)
     }
